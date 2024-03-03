@@ -91,7 +91,7 @@ with open("parser_output.txt", "w") as parser_output:
 
     
     opList = list(opSet)
-
+    # opList.sort()
     #writing data into the parser_output file
     for i in opList:
         parser_output.write(i)
