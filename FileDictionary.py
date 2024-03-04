@@ -28,14 +28,8 @@ class FileDictionary:
                 docnos = extract_docno(file_path)
                 all_file_names.extend(docnos)
                 for fileName in all_file_names:
-                    # print(fileName, self.currFileId)
                     self.fileIDs[fileName] = self.currFileId
                     self.currFileId += 1 #increment the id for the next word
 
-                # self.fileIDs[File] = self.currFileId #if condiction is satisified we add it to our dict along with an ID
-                
-# obj = FileDictionary(folder)
-# obj.appendFiles()
-# var = obj.getAllFiles()
-# print(var)
+          
 
