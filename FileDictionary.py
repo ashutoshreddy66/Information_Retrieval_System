@@ -1,7 +1,7 @@
 import os
 import re
 
-from test import extract_docno
+from docnos import extract_docno
 
 folder = './ft911/'
 all_file_names = []
