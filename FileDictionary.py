@@ -1,7 +1,3 @@
-import os
-import re
-
-
 folder = './ft911/'
 all_file_names = []
 
@@ -13,13 +9,13 @@ class FileDictionary:
         self.folder = path#set a foldder ref with the given path
 
     def getFileId(self, file):
-        return self.fileIDs.get(file, None)
+        return self.fileIDs.get(file, None)#return the ID of the file(DOCNO) for a given file
     
     def getAllFiles(self):
-        return self.fileIDs
+        return self.fileIDs#returns all the files(DOCNOS)
     
     
     def appendFiles(self, file):
-         self.fileIDs[file] = self.currFileId
-         self.currFileId += 1
+         self.fileIDs[file] = self.currFileId#appending the file(docno) along with a new id
+         self.currFileId += 1#incrementing the id
 
