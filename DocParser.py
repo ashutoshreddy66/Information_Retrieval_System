@@ -1,6 +1,5 @@
 import os
 import xml.dom.minidom as xdm
-import xml.etree.ElementTree as ET
 
 date = 'DATE'
 pro = 'PROFILE'
