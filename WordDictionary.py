@@ -19,8 +19,8 @@ class WordDictionary:
             self.currWordId += 1 #increment the id for the next word
 
     def getWordId(self, word):
-        stemWord = self.stemmer.stem(word)
-        return self.wordIDs.get(stemWord, None)
+        stemWord = self.stemmer.stem(word)#getting the stemmed form of the given word
+        return self.wordIDs.get(stemWord, None)#returning the ID of the stemmef word
     
-    def fetch_d(self):
+    def fetch_d(self):#this method will be used in main.py to fetch all ids that will be written to the output file
         return self.wordIDs

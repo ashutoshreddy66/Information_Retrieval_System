@@ -1,18 +1,5 @@
 import re
 
-
-def tokenizer(doc):
-    
-
-    tokens = re.findall(r'\b\w+\b', doc.lower()) 
-
-    tokens = [toekn for toekn in tokens if not any(char.isdigit() for char in toekn)] 
-
-    tokens = list(filter(None, tokens)) 
-
-    return tokens
-
-
 def tokenizer(text):
     '''this method is used to convert a given text to tokens by changing all letters to lowercase letters
         and remove numbers. It also ignores words containing numbers'''

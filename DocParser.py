@@ -1,35 +1,37 @@
 import os
 import xml.dom.minidom as xdm
-import xml.etree.ElementTree as ET
 
 date = 'DATE'
 pro = 'PROFILE'
 DOC = 'DOCNO'
 path = './ft911/'
+doc_tag_open = '<DOC>'
+doc_tag_close = '</DOC>'
+read_mode = 'r'
 
 class DocParser(object):
-    def convert(val):
-        doc = xdm.parseString(val)
-        root = doc.documentElement
-        docs = {}
+    def convert(val):#method will be used by the fetchdocs() method below to fetch all docnos and complete data
+        doc = xdm.parseString(val)#using xdm library to manipulate/parse the input files
+        root = doc.documentElement#gets the root element
+        docs = {}#declaring a dict to store all data
 
-        for doc in root.childNodes:
-            for ele in doc.childNodes:
-                if(ele.nodeType == ele.ELEMENT_NODE):
-                    if ele.tagName == date or ele.tagName == pro:
+        for doc in root.childNodes:#iterating through all docs
+            for ele in doc.childNodes:#iiterating through all elements in docs
+                if(ele.nodeType == ele.ELEMENT_NODE):#check if the nodetype of the element is node element itself
+                    if ele.tagName == date or ele.tagName == pro:#ignoring all elements that are not docno
                         continue
-                    elif ele.tagName == DOC:
+                    elif ele.tagName == DOC:#if the element is docno then we add it to out dict
                         DOCNO = ele.firstChild.data.strip()
                         docs[DOCNO] = []
-                    else:
+                    else:#else we append all the data to that specific docno
                         docs[DOCNO].append(ele.firstChild.data.strip())
         return docs
     
     
-    def fetchDocs(file):
-        with open(os.path.join(path, file), 'r') as File:
-            data = File.read()
-        full_data = '<DOC>' + data + '</DOC>'
-        docs = DocParser.convert(full_data)
+    def fetchDocs(file):#this method will be used in main.py to get the parsed docnos and doc content
+        with open(os.path.join(path, file), read_mode) as File:
+            doc_data = File.read()
+        full_doc_data = doc_tag_open + doc_data + doc_tag_close
+        docs = DocParser.convert(full_doc_data)
         return docs
 
