@@ -8,7 +8,7 @@ path = './ft911/'
 doc_tag = ['<DOC>', '</DOC>']
 read_mode = 'r'
 
-class DocParser(object):
+class TextParser(object):
     def convert(val):#method will be used by the fetchdocs() method below to fetch all docnos and complete data
         doc = xdm.parseString(val)#using xdm library to manipulate/parse the input files
         root = doc.documentElement#gets the root element
@@ -31,6 +31,6 @@ class DocParser(object):
         with open(os.path.join(path, file), read_mode) as File:
             doc_data = File.read()
         full_doc_data = doc_tag[0] + doc_data + doc_tag[1]
-        docs = DocParser.convert(full_doc_data)
+        docs = TextParser.convert(full_doc_data)
         return docs
 

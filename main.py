@@ -3,7 +3,7 @@ from pathlib import Path
 from WordDictionary import WordDictionary
 from FileDictionary import FileDictionary
 from tokenizer import tokenizer
-from DocParser import DocParser
+from DocParser import TextParser
 from datetime import datetime
 
 print("Running code at:", datetime.now())
@@ -32,7 +32,7 @@ FileDict = FileDictionary(path)
 
 #looping over all the files in the folder mentioned above and and adding them to complete data
 for file in folder:
-    docs = DocParser.fetchDocs(file)
+    docs = TextParser.fetchDocs(file)
     for docno, data in docs.items():
         FileDict.appendFiles(docno)
         tokens = tokenizer(data)
