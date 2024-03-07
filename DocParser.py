@@ -31,6 +31,6 @@ class TextParser(object):
         with open(os.path.join(path, file), read_mode) as File:
             doc_data = File.read()
         full_doc_data = doc_tag[0] + doc_data + doc_tag[1]
-        docs = DocParser.convert(full_doc_data)
+        docs = TextParser.convert(full_doc_data)
         return docs
 
