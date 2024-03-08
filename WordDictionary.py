@@ -25,6 +25,5 @@ class WordDictionary:
         return self.wordIDs.get(stemWord, None)#returning the ID of the stemmef word
     
     def fetch_d(self):#this method will be used in main.py to fetch all ids that will be written to the output file
-        words = self.wordIDs
-        sorted_wordIDs = dict(sorted(words.items(), key=lambda item: item[1]))
-        return sorted_wordIDs
+        sorted_order = dict(sorted(self.wordIDs.items(), key=lambda item:item[1]))
+        return sorted_order
