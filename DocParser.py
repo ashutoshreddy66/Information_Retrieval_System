@@ -4,6 +4,7 @@ import xml.dom.minidom as xdm
 date = 'DATE'
 pro = 'PROFILE'
 DOC = 'DOCNO'
+TEXT = 'TEXT'
 path = './ft911/'
 doc_tag = ['<DOC>', '</DOC>']
 read_mode = 'r'
@@ -22,7 +23,7 @@ class TextParser(object):
                     elif ele.tagName == DOC:#if the element is docno then we add it to out dict
                         DOCNO = ele.firstChild.data.strip()
                         docs[DOCNO] = []
-                    else:#else we append all the data to that specific docno
+                    elif ele.tagName == TEXT:#else we append all the data to that specific docno
                         docs[DOCNO].append(ele.firstChild.data.strip())
         return docs
     
