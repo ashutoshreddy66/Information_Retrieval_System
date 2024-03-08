@@ -19,7 +19,7 @@ def parser_output(data, mode):
     try:#exception handling
         filePath = os.path.join(Path(__file__).parent.resolve(), parser_file)#created a file if it doesn't already exist to write output
         with open(filePath, mode) as parser_output:
-            for key in sorted(data.keys()):#iterates through all docnos and stemmed words
+            for key in data.keys():#iterates through all docnos and stemmed words
                 parser_output.write(f"{key}\t{data[key]}\n")#appeninf the DOCNO: DOCID and Word : WOrdID to the parser_output file
         print("Parser output- Success: Writing data COmpleted!")
     except:#shows error message in case of failure
