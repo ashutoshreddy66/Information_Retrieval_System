@@ -46,11 +46,14 @@ for file in folder:
             WordDict.appendWord(token)
         forwardIndex[docno] = tokens
 
+forward_index = "forward_index.txt"
+inverted_index_file = "inverted_index.txt"
 
 new_forwardIndex = Indexer.create_forward_index(forwardIndex)
-# print(forwardIndex)
-Indexer.write_forward_index(new_forwardIndex)
-# print(new_forwardIndex)
+Indexer.write_forward_index(new_forwardIndex, forward_index)
+
+inverted_index = Indexer.create_inverted_index(new_forwardIndex)
+Indexer.write_inverted_index(inverted_index, inverted_index_file)
 
 parser_output(parser_file, WordDict.fetch_d(), w)#once all the word data is feteched, we write the data to the output file using the 'w' mode
 parser_output(parser_file, FileDict.getAllFiles(), a)#once all the filenames are feteched, we append the data to the output file using the 'a' mode
