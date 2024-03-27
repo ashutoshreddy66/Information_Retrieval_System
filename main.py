@@ -7,6 +7,10 @@ from tokenizer import tokenizer
 from DocParser import TextParser
 from datetime import datetime
 from indexer import Indexer
+import nltk
+from nltk.stem import PorterStemmer
+
+# nltk.download('punkt')
 
 
 print("Running code at:", datetime.now())
@@ -15,6 +19,8 @@ path = "./ft911/"
 folder = os.listdir(path=path)
 
 parser_file = "parser_output.txt"
+forward_index_file = "forward_index.txt"
+inverted_index_file = "inverted_index.txt"
 w = 'w'
 a = 'a'
 
@@ -34,8 +40,19 @@ WordDict = WordDictionary()
 FileDict = FileDictionary(path)
 
 
-forwardIndex = {}
+def get_stem_words(forward_words):
+    stemmer = PorterStemmer() 
+    stemmed_words = []
+    for word in forward_words:
+        stemword = stemmer.stem(word)
+        if stemword == "":
+            pass
+        elif stemword not in stemmed_words:
+            stemmed_words.append(stemword)
+    return stemmed_words
 
+forwardIndex = {}
+forward_tokens = []
 #looping over all the files in the folder mentioned above and and adding them to complete data
 for file in folder:
     docs = TextParser.fetchDocs(file)
@@ -44,16 +61,18 @@ for file in folder:
         tokens = tokenizer(data)
         for token in tokens:
             WordDict.appendWord(token)
-        forwardIndex[docno] = tokens
+        stemmed_words = get_stem_words(tokens)
+        forwardIndex[docno] = stemmed_words
 
-forward_index = "forward_index.txt"
-inverted_index_file = "inverted_index.txt"
-
+start = time.time()
 new_forwardIndex = Indexer.create_forward_index(forwardIndex)
-Indexer.write_forward_index(new_forwardIndex, forward_index)
+Indexer.write_forward_index(new_forwardIndex, forward_index_file)
 
 inverted_index = Indexer.create_inverted_index(new_forwardIndex)
 Indexer.write_inverted_index(inverted_index, inverted_index_file)
+
+print("Time taken to generate indexes: " + str(round(time.time() - start)) + " seconds")
+# print("The size of inverted index is: " + str(len(WordDict.get_dict().keys())))
 
 parser_output(parser_file, WordDict.fetch_d(), w)#once all the word data is feteched, we write the data to the output file using the 'w' mode
 parser_output(parser_file, FileDict.getAllFiles(), a)#once all the filenames are feteched, we append the data to the output file using the 'a' mode
