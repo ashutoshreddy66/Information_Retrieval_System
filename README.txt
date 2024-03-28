@@ -1,4 +1,4 @@
-#Project Phase 1 README.
+#Project Phase 2 README.
 
 ##Requirements
 - Python 3.0 or later
@@ -19,5 +19,5 @@ the command "python main.py" from where the main.py file is located.
 2. Run all cells at once to see the output in the `parser_output.txt` file.
 
 ##Output
-- The output of either type of execution can be found in parser_output.txt
+- Upon compiling either the python project from main.py or running all the cells using the main.ipynb file you will be able to find the outputs in forward_index.txt that stores all forward indices and inverted_index.txt that stores all inverted indices. 
 
