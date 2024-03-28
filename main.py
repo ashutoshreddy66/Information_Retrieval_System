@@ -64,15 +64,23 @@ for file in folder:
         stemmed_words = get_stem_words(tokens)
         forwardIndex[docno] = stemmed_words
 
-start = time.time()
+start_parser = time.time()
+parser_output(parser_file, WordDict.fetch_d(), w)#once all the word data is feteched, we write the data to the output file using the 'w' mode
+parser_output(parser_file, FileDict.getAllFiles(), a)#once all the filenames are feteched, we append the data to the output file using the 'a' mode
+end_parser = time.time()
+
+total_parser_time = end_parser - start_parser
+print(f"Time taken for Parsing the documents = {total_parser_time} seconds")
+
+start_time = time.time()
 new_forwardIndex = Indexer.create_forward_index(forwardIndex)
 Indexer.write_forward_index(new_forwardIndex, forward_index_file)
 
 inverted_index = Indexer.create_inverted_index(new_forwardIndex)
 Indexer.write_inverted_index(inverted_index, inverted_index_file)
+end_time = time.time()
 
-print("Time taken to generate indexes: " + str(round(time.time() - start)) + " seconds")
-# print("The size of inverted index is: " + str(len(WordDict.get_dict().keys())))
-
-parser_output(parser_file, WordDict.fetch_d(), w)#once all the word data is feteched, we write the data to the output file using the 'w' mode
-parser_output(parser_file, FileDict.getAllFiles(), a)#once all the filenames are feteched, we append the data to the output file using the 'a' mode
+execution_time = end_time - start_time
+print(f"Time taken to generate the indexes is {execution_time} seconds.")
+print(f"Total number of words = {len(inverted_index)}")
+print(f"Total number of documents = {len(new_forwardIndex)}")
