@@ -19,7 +19,7 @@ class Indexer:
             with open(filepath, "w") as fIndex:
                 for docno, counts in new_forwardIndex.items():
                     fIndex.write(f"{docno}:\t" +"; ".join([f"{word} {count}" for word, count in counts.items()]))
-                    fIndex.write("\n\n")
+                    fIndex.write("\n")
             print("index success in "+fileName)
         except:
             print(f"index {fileName} failure ")
@@ -42,7 +42,7 @@ class Indexer:
             with open(filepath, "w") as iIndex:
                 for word, postings in inverted_index.items():
                     iIndex.write(f"{word}:\t"+"; ".join(f"{docno} {count}" for docno, count in postings))
-                    iIndex.write("\n\n")
+                    iIndex.write("\n")
             print("index success in "+filename)
         except:
             print(f"index {filename} failure ")
