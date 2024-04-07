@@ -47,7 +47,7 @@ def get_stem_words(forward_words):
         stemword = stemmer.stem(word)
         if stemword == "":
             pass
-        elif stemword not in stemmed_words:
+        else:
             stemmed_words.append(stemword)
     return stemmed_words
 
@@ -55,7 +55,7 @@ forwardIndex = {}
 forward_tokens = []
 #looping over all the files in the folder mentioned above and and adding them to complete data
 for file in folder:
-    docs = TextParser.fetchDocs(file)
+    docs = TextParser.fetchDocs(path, file)
     for docno, data in docs.items():
         FileDict.appendFiles(docno)
         tokens = tokenizer(data)
