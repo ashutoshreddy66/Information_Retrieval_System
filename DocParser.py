@@ -5,7 +5,6 @@ date = 'DATE'
 pro = 'PROFILE'
 DOC = 'DOCNO'
 TEXT = 'TEXT'
-path = './ft911/'
 doc_tag = ['<DOC>', '</DOC>']
 read_mode = 'r'
 
@@ -28,7 +27,7 @@ class TextParser(object):
         return docs
     
     
-    def fetchDocs(file):#this method will be used in main.py to get the parsed docnos and doc content
+    def fetchDocs(path, file):#this method will be used in main.py to get the parsed docnos and doc content
         with open(os.path.join(path, file), read_mode) as File:
             doc_data = File.read()
         full_doc_data = doc_tag[0] + doc_data + doc_tag[1]

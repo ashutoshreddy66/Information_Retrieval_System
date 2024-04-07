@@ -1,4 +1,3 @@
-folder = './ft911/'
 all_file_names = []
 
 class FileDictionary:
