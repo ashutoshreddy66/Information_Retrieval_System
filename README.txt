@@ -32,3 +32,4 @@ the command "python main.py" from where the main.py file is located.
 
 ##Testing
 - For testing the code with a different dataset, please replace the 'path' variable on line 18 in main.py file with the absolute path of the test folder.
+- Run the last cell in the python notebook and enter the term you want to retrieve the indexes for.
