@@ -84,3 +84,18 @@ execution_time = end_time - start_time
 print(f"Time taken to generate the indexes is {execution_time} seconds.")
 print(f"Total number of words = {len(inverted_index)}")
 print(f"Total number of documents = {len(new_forwardIndex)}")
+
+def test_function():
+    text = input("Enter a word you want to search: ")
+
+    if text not in inverted_index:
+        print("The word you are searching for is not present in the index!")
+    else:
+       info = inverted_index.get(text)
+       completeInfo = ""
+       for docno, count in info:
+           completeInfo += docno+ " "+str(count)+"; "
+       print(f"{text}:\t{completeInfo}")
+           
+
+test_function()
