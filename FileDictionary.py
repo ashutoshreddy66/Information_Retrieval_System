@@ -18,3 +18,9 @@ class FileDictionary:
          self.fileIDs[file] = self.currFileId#appending the file(docno) along with a new id
          self.currFileId += 1#incrementing the id
 
+    def getFileName(self, id):
+        for filename, file_id in self.fileIDs.items():
+            if id == file_id:
+                return filename
+        return None
+
