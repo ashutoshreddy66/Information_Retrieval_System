@@ -12,7 +12,7 @@
 1. Open 'main.py'
 2. Before running the python file to check the output, you must make sure you have the "nltk" library installed. If not, run the command "pip install -U nltk"
 3. Once all the dependencies are installed, you can run the file by either clicking on the run button or running 
-the command "python main.py" from where the main.py file is located.
+the command "python main.py" from the main.py file location.
 
 ##Output
 - Upon compiling either the python project from main.py you can notice the "vsm_.txt" files getting populated. 
