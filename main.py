@@ -1,3 +1,4 @@
+from collections import OrderedDict
 import math
 import os
 import re
@@ -148,6 +149,10 @@ def getCosineScore(query):#calculates the cosine score for a given query
 queryList = query_parser()
 # print(queryList)
 
+
+topic = {}
+desc = {}
+narr = {}
 print(f"Calculating cosine score for queryList")
 vsm_title = open(os.path.join(Path(__file__).parent.resolve(), vsm_title_file), w)
 vsm_desc = open(os.path.join(Path(__file__).parent.resolve(), vsm_desc_file), w)
@@ -161,8 +166,11 @@ for topicNumber, query in queryList.items():
     for words in wordsList:
         [stemmer.stem(word) for word in words]
     titles = getCosineScore(wordsList[0])
+    titles = OrderedDict(sorted(titles.items(), key= lambda x:x[1], reverse= True))
     descriptions = getCosineScore(wordsList[0]+wordsList[1])
+    descriptions = OrderedDict(sorted(descriptions.items(), key= lambda x:x[1], reverse= True))
     narratives = getCosineScore(wordsList[0]+wordsList[2])
+    narratives = OrderedDict(sorted(narratives.items(), key= lambda x:x[1], reverse= True))
 
     # print(titles)
     # print(descriptions)
@@ -171,18 +179,33 @@ for topicNumber, query in queryList.items():
     for docNo, value in titles.items():
         vsm_title.write(f"{topicNumber}\t{FileDict.getFileName(docNo)}\t{i+1}\t{value}\n")
         i += 1
+        if topicNumber not in topic.keys():
+            topic[topicNumber] = 0
+        else:
+            topic[topicNumber] += 1
     
     for docNo, value in descriptions.items():
         vsm_desc.write(f"{topicNumber}\t{FileDict.getFileName(docNo)}\t{j+1}\t{value}\n")
         j += 1
+        if topicNumber not in desc.keys():
+            desc[topicNumber] = 0
+        else:
+            desc[topicNumber] += 1
     
     for docNo, value in narratives.items():
         vsm_narr.write(f"{topicNumber}\t{FileDict.getFileName(docNo)}\t{k+1}\t{value}\n")
         k += 1
+        if topicNumber not in narr.keys():
+            narr[topicNumber] = 0
+        else:
+            narr[topicNumber] += 1
 
 vsm_title.close()
 vsm_desc.close()
 vsm_narr.close()
 # test_function()
 
+print(f"topic = {topic}")
+print(f"desc = {desc}")
+print(f"narr = {narr}")
 print("Finished writing cosine scores")
